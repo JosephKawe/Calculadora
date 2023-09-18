@@ -2,7 +2,9 @@
 
 Uma calculadora simples e elegante desenvolvida por Joseph Kawe, com o uso do Tailwind CSS.
 
-![Calculadora Web](./images/logo.png)
+<a href="#">
+  <img src="./images/logo.png" alt="Logo" style="width: 100px; height: auto;">
+</a>
 
 ## Descrição
 
