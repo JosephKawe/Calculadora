@@ -3,7 +3,7 @@
 Uma calculadora simples e elegante desenvolvida por Joseph Kawe, com o uso do Tailwind CSS.
 
 <a href="#">
-  <img src="./images/logo.png" alt="Logo" style="width: 60px; height: auto;">
+  <img src="./images/logo.png" alt="Logo" style="width: 100px; height: auto;">
 </a>
 
 ## Descrição
