@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora</title>
+
+  <!-- Link Logo -->
+  <link rel="icon" type="image/png" href="images/logo.png"/>
+  <!-- Link Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            transparent: "transparent",
+          },
+          spacing: {
+            'result_width': '17.2rem',
+          },
+          fontFamily: {
+            lato: ['Lato', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/eb756a0a70.js" crossorigin="anonymous"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fraction.js/4.0.12/fraction.min.js"></script>
+
+</head>
+<body class="bg-zinc-100 dark:bg-zinc-900 flex flex-col justify-center align-center h-screen">
+
+  <header class="flex h-14 bg-zinc-100 dark:bg-zinc-900 border-b-2 border-zinc-900 dark:border-zinc-100 top-0 w-screen absolute justify-center items-center">
+    <a href="/">
+      <img class="w-16 invert dark:invert-0" src="./images/logo.png" alt="Logo">
+    </a>
+  </header>
+  
+  <main class="flex justify-center items-center">
+    <div id="container" class="flex flex-col items-center">
+      <div id="container_calculadora" class="w-result_width h-3/5 rounded-lg flex flex-col items-center justify-center">
+        <p id="result" class="w-full h-12 my-6 text-2xl font-semibold text-center overflow-hidden border-2 border-zinc-900 dark:border-2 dark:bg-transparent dark:border-zinc-100 dark:text-zinc-100 rounded-lg p-2">
+          <!-- Resultado aqui -->
+        </p>
+  
+        <table class="mb-8 font-lato">
+          <tr>
+            <td><button class="w-16 h-16 m-0.5 text-xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="clearNumbers()">C</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="eraser()"><</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show('/')">/</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show('*')">*</button></td>
+          </tr>
+          
+          <tr>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(7)">7</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(8)">8</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(9)">9</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show('-')">-</button></td>
+          </tr>
+          
+          <tr>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(4)">4</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(5)">5</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(6)">6</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show('+')">+</button></td>
+          </tr>
+          
+          <tr>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark-border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(1)">1</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(2)">2</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(3)">3</button></td>
+            <td rowspan="2"><button style="height: 5.6em;" class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100 bg-zinc-100 dark:text-zinc-100" onclick="operacao()">=</button></td>
+          </tr>
+          <tr>
+            <td colspan="2"><button style="width: 5.6em;" class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show(0)">0</button></td>
+            <td><button class="w-16 h-16 m-0.5 text-2xl font-semibold hover:bg-zinc-900 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all rounded-md border-2 border-zinc-900 dark:border-2 dark:border-zinc-100 dark:bg-transparent dark:text-zinc-100" onclick="show('.')">.</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="flex justify-center font-lato items-center absolute bottom-0 w-screen h-16 text-sm text-zinc-900 bg-zinc-100 dark:bg-zinc-900 border-t-2 border-zinc-900 dark:border-zinc-100 dark:text-zinc-100">
+    <p>© 2023 Joseph Kawe. Todos os direitos reservados.</p>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>
